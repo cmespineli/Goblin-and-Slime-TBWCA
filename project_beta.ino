@@ -1,23 +1,28 @@
+#include <Servo.h>
 
-
+Servo myservo;
 const int pushButton = 2;
-const int led = 6;
+const int pushButton2 = 6;
 
 int previousButtonState;
 int presentButtonState;
-int ledState = LOW;
 
 void setup() {
   pinMode(pushButton, INPUT);
-  pinMode(led, OUTPUT);
+  pinMode(pushButton2, INPUT);
+  myservo.attach (4);
   Serial.begin(9600);
 }
 
 void loop() {
-  previousButtonState = presentButtonState;
-  presentButtonState = digitalRead(pushButton);
+  //previousButtonState = presentButtonState;
+  //presentButtonState = digitalRead(pushButton);
 
-  if (previousButtonState == HIGH && presentButtonState == LOW) {
-    ledState = !ledState;
-    digitalWrite(led, ledState);
+  if (digitalRead(buttonPin)==HIGH){
+    myservo.write(135);
+  }else if (digitalRead(buttonPin2)==HIGH){
+    myservo.write(45);
+  }else{
+    myservo.write(90);
   }
+}
